@@ -1,13 +1,17 @@
 const fs = require('fs');
 
-console.log(`Kronos Data Directory: ` + getUserHome()+`\\Kronos\\DATA`); 
+console.log(`Kronos Data Directory: ` + getUserHome()); 
 
 function getUserHome() {
-  // From process.env 
-  return process.env[(process.platform == 'win32') ? 'APPDATA' : 'HOME']; 
+// From process.env 
+	if (process.platform == 'win32') {
+	  return process.env.APPDATA+'\\Kronos\\DATA\\'; 
+	} else {
+	  return process.env.HOME+'/Kronos/DATA/'; 
+	}
 }
 
-let STORAGE_CATALOG = getUserHome()+`\\Kronos\\DATA\\storage`;
+let STORAGE_CATALOG = getUserHome()+'storage';
 let STORAGE_PATH = STORAGE_CATALOG + '/kronos.json';
 
 module.exports = class JsonStorage {
