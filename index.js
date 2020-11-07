@@ -1,7 +1,14 @@
 const fs = require('fs');
 
-let STORAGE_CATALOG = './data';
-let STORAGE_PATH = STORAGE_CATALOG + '/storage.json';
+console.log(`Kronos Data Directory: ` + getUserHome()+`\\Kronos\\DATA`); 
+
+function getUserHome() {
+  // From process.env 
+  return process.env[(process.platform == 'win32') ? 'APPDATA' : 'HOME']; 
+}
+
+let STORAGE_CATALOG = getUserHome()+`\\Kronos\\DATA\\storage`;
+let STORAGE_PATH = STORAGE_CATALOG + '/kronos.json';
 
 module.exports = class JsonStorage {
     static _open() {
